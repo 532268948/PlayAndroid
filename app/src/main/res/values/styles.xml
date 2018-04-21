@@ -8,4 +8,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="ProgressButton">
+        <attr name="pb_selector_idle" format="reference"/>
+        <attr name="pb_selector_complete" format="reference"/>
+        <attr name="pb_selector_error" format="reference"/>
+        <attr name="pb_icon_error" format="reference"/>
+        <attr name="pb_icon_complete" format="reference"/>
+        <attr name="pb_color_progress_background" format="color"/>
+        <attr name="pb_color_progress_indicator" format="color"/>
+        <attr name="pb_color_circle" format="color"/>
+        <attr name="pb_text_idle" format="string"/>
+        <attr name="pb_text_complete" format="string"/>
+        <attr name="pb_text_error" format="string"/>
+        <attr name="pb_radius" format="dimension"/>
+        <attr name="pb_stroke_width" format="dimension"/>
+
+    </declare-styleable>
+
 </resources>
