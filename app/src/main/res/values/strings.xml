@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PlayAndroid</string>
+    <string name="login">登  录</string>
+    <string name="register">注  册</string>
+    <string name="register_account">请输入用户名</string>
+    <string name="register_password">请输入密码</string>
+    <string name="register_re_password">请再次输入密码</string>
 </resources>

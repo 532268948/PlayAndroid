@@ -39,6 +39,7 @@ public class ProgressButton extends Button {
     private LoadDataListener loadDataListener;
 
     private int mStrokeWidth;
+    private int mCircleStrokeWidth;
     private int mRadius;
 
     private int mIconComplete;
@@ -87,12 +88,15 @@ public class ProgressButton extends Button {
 
         initAttributes(context, attrs);
         mState = State.IDLE;
+        setText(mTextIdle);
         initIdleStateDrawable();
         setBackground(mIdleStateDrawable);
-        setText(mTextIdle);
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                setText("");
+                removeIcon();
+                invalidate();
                 loadAnimation();
             }
         });
@@ -111,16 +115,17 @@ public class ProgressButton extends Button {
             mCompleteColorState = getResources().getColorStateList(attr.getResourceId(R.styleable.ProgressButton_pb_selector_complete, R.color.pb_idle_state_color));
             mErrorColorState = getResources().getColorStateList(attr.getResourceId(R.styleable.ProgressButton_pb_selector_error, R.color.pb_idle_state_color));
 
-            mColorProgress = attr.getResourceId(R.styleable.ProgressButton_pb_color_progress_background, context.getResources().getColor(R.color.white));
-            mColorIndicator = attr.getResourceId(R.styleable.ProgressButton_pb_color_progress_indicator, context.getResources().getColor(R.color.button_progress_green));
-            mColorCircle = attr.getResourceId(R.styleable.ProgressButton_pb_color_circle, context.getResources().getColor(R.color.colorAccent));
+            mColorProgress = attr.getResourceId(R.styleable.ProgressButton_pb_color_progress_background, getResources().getColor(R.color.white));
+            mColorIndicator = attr.getResourceId(R.styleable.ProgressButton_pb_color_progress_indicator, getResources().getColor(R.color.button_progress_green));
+            mColorCircle = attr.getResourceId(R.styleable.ProgressButton_pb_color_circle, getResources().getColor(R.color.colorAccent));
 
             mTextIdle = attr.getString(R.styleable.ProgressButton_pb_text_idle);
             mTextComplete = attr.getString(R.styleable.ProgressButton_pb_text_complete);
             mTextError = attr.getString(R.styleable.ProgressButton_pb_text_error);
 
             mRadius = attr.getDimensionPixelSize(R.styleable.ProgressButton_pb_radius, 0);
-            mStrokeWidth = attr.getDimensionPixelSize(R.styleable.ProgressButton_pb_stroke_width, 10);
+            mStrokeWidth = attr.getDimensionPixelSize(R.styleable.ProgressButton_pb_stroke_width, 0);
+            mCircleStrokeWidth=attr.getDimensionPixelSize(R.styleable.ProgressButton_pb_circle_stroke_width,10);
 
         } finally {
             attr.recycle();
@@ -132,10 +137,10 @@ public class ProgressButton extends Button {
         int colorPressed = mIdleColorState.getColorForState(new int[]{android.R.attr.state_pressed}, 0);
         int colorFocused = mIdleColorState.getColorForState(new int[]{android.R.attr.state_focused}, 0);
         int colorDisabled = mIdleColorState.getColorForState(new int[]{-android.R.attr.state_enabled}, 0);
+
         if (background == null) {
             background = createDrawable(colorNormal);
         }
-
         StrokeGradientDrawable drawableDisabled = createDrawable(colorDisabled);
         StrokeGradientDrawable drawableFocused = createDrawable(colorFocused);
         StrokeGradientDrawable drawablePressed = createDrawable(colorPressed);
@@ -171,9 +176,11 @@ public class ProgressButton extends Button {
         GradientDrawable drawable = (GradientDrawable) getResources().getDrawable(R.drawable.button_progress).mutate();
         drawable.setColor(color);
         drawable.setCornerRadius(mRadius);
+//        drawable.setStroke(mStrokeWidth,color);
         StrokeGradientDrawable strokeGradientDrawable = new StrokeGradientDrawable(drawable);
-        strokeGradientDrawable.setStrokeColor(color);
         strokeGradientDrawable.setStrokeWidth(mStrokeWidth);
+        strokeGradientDrawable.setStrokeColor(color);
+//        Log.e("ProgressButton",color+" ");
         return strokeGradientDrawable;
     }
 

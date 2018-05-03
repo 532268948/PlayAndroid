@@ -1,8 +1,11 @@
 package com.zust.playandroid.app;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
+import com.zust.playandroid.utils.ToastUtil;
 
 /**
  * 作 者： ZUST_YTH
@@ -15,6 +18,7 @@ import com.squareup.leakcanary.LeakCanary;
 
 public class PlayApplication extends Application {
 
+    private RefWatcher refWatcher;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -24,5 +28,11 @@ public class PlayApplication extends Application {
             return;
         }
         LeakCanary.install(this);
+        ToastUtil toastUtil=new ToastUtil(this);
+    }
+
+    public static RefWatcher getRefWatcher(Context context) {
+        PlayApplication leakApplication = (PlayApplication) context.getApplicationContext();
+        return leakApplication.refWatcher;
     }
 }

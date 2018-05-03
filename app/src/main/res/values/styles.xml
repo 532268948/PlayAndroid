@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <declare-styleable name="ProgressButton">
         <attr name="pb_selector_idle" format="reference"/>
         <attr name="pb_selector_complete" format="reference"/>
@@ -22,7 +27,7 @@
         <attr name="pb_text_error" format="string"/>
         <attr name="pb_radius" format="dimension"/>
         <attr name="pb_stroke_width" format="dimension"/>
-
+        <attr name="pb_circle_stroke_width" format="dimension"/>
     </declare-styleable>
 
 </resources>
