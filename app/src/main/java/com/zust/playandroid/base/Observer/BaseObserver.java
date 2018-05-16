@@ -33,6 +33,8 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
             mView.showMessage("请求超时");
         }else if (e instanceof ConnectException){
             mView.showMessage("连接异常");
+        }else {
+            e.printStackTrace();
         }
     }
 

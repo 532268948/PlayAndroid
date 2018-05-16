@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.splash.SplashActivity">
-<Button
-    android:id="@+id/btn1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="button"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="splashActivity"/>
 </android.support.constraint.ConstraintLayout>

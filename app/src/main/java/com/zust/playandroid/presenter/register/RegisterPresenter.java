@@ -31,7 +31,7 @@ public class RegisterPresenter<V extends RegisterContract.View> extends BasePres
 
     @Override
     public void getRegisterData() {
-        addDiaposable((Disposable) PlayAndroidService.getInstance()
+        addDiaposable((Disposable) PlayAndroidService.getInstance(context.get())
                 .getRegisterData(view.get().getName(), view.get().getPassword(), view.get().getRePassword())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -58,6 +58,7 @@ public class RegisterPresenter<V extends RegisterContract.View> extends BasePres
                         try {
                             PlayAndroidPreference.getInstance(context.get()).setAccount(username);
                             PlayAndroidPreference.getInstance(context.get()).setPassword(password);
+                            PlayAndroidPreference.getInstance(context.get()).setRemember(true);
                             if (PlayAndroidPreference.getInstance(context.get()).getFirst()){
                                 PlayAndroidPreference.getInstance(context.get()).setFirst(false);
                                 emitter.onNext(1);

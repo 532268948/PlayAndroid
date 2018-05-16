@@ -1,12 +1,18 @@
 package com.zust.playandroid.utils;
 
+import com.zust.playandroid.bean.ArticleListBean;
+import com.zust.playandroid.bean.BannerBean;
 import com.zust.playandroid.bean.LoginBean;
 import com.zust.playandroid.bean.ResponseWrapper;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * 作 者： ZUST_YTH
@@ -40,4 +46,12 @@ public interface PlayAndroidApi {
     @FormUrlEncoded
     Observable<ResponseWrapper<LoginBean>> getRegisterData(@Field("username")String username,@Field("password")String password,@Field("repassword")String repassword);
 
+    @GET("banner/json")
+    Observable<ResponseWrapper<List<BannerBean>>> getBannerData();
+
+    @GET("article/list/{num}/json")
+    Observable<ResponseWrapper<ArticleListBean>> getHomeArticleData(@Path("num") int num);
+
+    @POST("lg/collect/{id}/json")
+    Observable<ResponseWrapper<ArticleListBean>> addCollect(@Path("id")int id);
 }

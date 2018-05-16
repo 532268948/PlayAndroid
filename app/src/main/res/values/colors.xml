@@ -8,4 +8,7 @@
     <color name="white">#ffffff</color>
     <color name="white_30">#4dffffff</color>
     <color name="transport">#00ffffff</color>
+    <color name="bottom_nav_item_gray">#bebebe</color>
+    <color name="code_black_70">#b2000000</color>
+    <color name="code_gray_70">#b2bebebe</color>
 </resources>

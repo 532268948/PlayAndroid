@@ -196,7 +196,7 @@ public class ProgressButton extends Button {
 
 
     public void loadAnimation() {
-        Log.e("ProgressButton", "onClick()");
+//        Log.e("ProgressButton", "onClick()");
         if (animating) {
             return;
         } else {
@@ -254,7 +254,7 @@ public class ProgressButton extends Button {
         } else if (mProgress > 0) {
             if (mState == State.IDLE) {
                 morphToProgress();
-                Log.e("ProgressButton","morthToProgress()");
+//                Log.e("ProgressButton","morthToProgress()");
             } else {
                 return;
             }

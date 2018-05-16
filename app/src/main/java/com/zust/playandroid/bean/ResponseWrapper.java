@@ -1,5 +1,7 @@
 package com.zust.playandroid.bean;
 
+import java.io.Serializable;
+
 /**
  * 作 者： ZUST_YTH
  * 日 期： 2018/4/22
@@ -9,7 +11,7 @@ package com.zust.playandroid.bean;
  */
 
 
-public class ResponseWrapper<T> {
+public class ResponseWrapper<T> implements Serializable{
     public static final int SUCCESS = 0;
     public static final int FAIL = 1;
 

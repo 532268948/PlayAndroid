@@ -1,7 +1,11 @@
 package com.zust.playandroid.utils;
 
+import android.content.Context;
+
 import com.zust.playandroid.bean.LoginBean;
 import com.zust.playandroid.bean.ResponseWrapper;
+import com.zust.playandroid.dao.cookie.AddCookiesInterceptor;
+import com.zust.playandroid.dao.cookie.ReceivedCookiesInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,10 +36,14 @@ public class PlayAndroidService{
     private static final String baseUrl = "http://www.wanandroid.com/";
     private PlayAndroidApi androidApi;
     private Retrofit retrofit;
+    private Context context;
 
-    private PlayAndroidService() {
+    private PlayAndroidService(Context context) {
         //设置超时时间
+        this.context=context;
         OkHttpClient.Builder httpcientBuilder = new OkHttpClient.Builder()
+                .addInterceptor(new AddCookiesInterceptor(context))
+                .addInterceptor(new ReceivedCookiesInterceptor(context))
                 .connectTimeout(5, TimeUnit.SECONDS);
         retrofit = new Retrofit.Builder()
                 .client(httpcientBuilder.build())
@@ -46,11 +54,11 @@ public class PlayAndroidService{
         androidApi = retrofit.create(PlayAndroidApi.class);
     }
 
-    public static PlayAndroidService getInstance() {
+    public static PlayAndroidService getInstance(Context context) {
         if (instance == null) {
             synchronized (PlayAndroidService.class) {
                 if (instance == null) {
-                    instance = new PlayAndroidService();
+                    instance = new PlayAndroidService(context.getApplicationContext());
                 }
             }
         }
@@ -63,10 +71,18 @@ public class PlayAndroidService{
 
     public Observable getRegisterData(String username,String password,String repassword){
         return androidApi.getRegisterData(username, password, repassword);
-//                .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(observer);
+    }
+
+    public Observable getBannerData(){
+        return androidApi.getBannerData();
+    }
+
+    public Observable getHomeArticleData(int num){
+        return androidApi.getHomeArticleData(num);
+    }
+
+    public Observable addCollect(int id){
+        return androidApi.addCollect(id);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.zust.playandroid.bean;
 
+import java.io.Serializable;
+
 /**
  * 作 者： ZUST_YTH
  * 日 期： 2018/4/22
@@ -9,7 +11,7 @@ package com.zust.playandroid.bean;
  */
 
 
-public class LoginBean {
+public class LoginBean implements Serializable{
     String username;
     String password;
 

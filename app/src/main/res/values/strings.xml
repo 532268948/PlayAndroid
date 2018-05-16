@@ -5,4 +5,15 @@
     <string name="register_account">请输入用户名</string>
     <string name="register_password">请输入密码</string>
     <string name="register_re_password">请再次输入密码</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="toolbar_title_home">首 页</string>
+    <string name="toolbar_title_tree">体 系</string>
+    <string name="toolbar_title_navi">导 航</string>
+    <string name="toolbar_title_project">项 目</string>
+    <string name="toolbar_menu_collect">收藏</string>
+    <string name="toolbar_menu_cancel_collect">取消收藏</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

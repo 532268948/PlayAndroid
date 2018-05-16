@@ -6,6 +6,11 @@ import android.content.SharedPreferences;
 
 import com.zust.playandroid.app.PlayApplication;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import okhttp3.Cookie;
+
 /**
  * 作 者： ZUST_YTH
  * 日 期： 2018/5/1
@@ -20,6 +25,7 @@ public class PlayAndroidPreference implements PreferenceHelper{
     private volatile static PlayAndroidPreference instance=null;
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
+    HashSet<String> siteno = new HashSet<String>();
 
     private PlayAndroidPreference(Context context){
         sp=context.getSharedPreferences("playandroid", Activity.MODE_PRIVATE);
@@ -65,5 +71,35 @@ public class PlayAndroidPreference implements PreferenceHelper{
     @Override
     public Boolean getFirst() {
         return sp.getBoolean("first",true);
+    }
+
+    @Override
+    public void setRemember(boolean remember) {
+        editor.putBoolean("remember",remember).commit();
+    }
+
+    @Override
+    public Boolean getRemember() {
+        return sp.getBoolean("remember",false);
+    }
+
+    @Override
+    public void setCookie(String cookie) {
+        editor.putString("cookie",cookie).commit();
+    }
+
+    @Override
+    public String getCookie() {
+        return sp.getString("cookie","");
+    }
+
+    @Override
+    public void setCookie(HashSet<String> cookies){
+        editor.putStringSet("cookies",cookies).commit();
+    }
+
+    @Override
+    public HashSet<String> getCookie(HashSet<String> cookie) {
+        return (HashSet<String>) sp.getStringSet("cookies",cookie);
     }
 }

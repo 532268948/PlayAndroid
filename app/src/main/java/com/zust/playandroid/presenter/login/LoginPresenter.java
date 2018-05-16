@@ -1,5 +1,7 @@
 package com.zust.playandroid.presenter.login;
 
+import android.util.Log;
+
 import com.zust.playandroid.base.Observer.BaseObserver;
 import com.zust.playandroid.base.presenter.BasePresenter;
 import com.zust.playandroid.bean.LoginBean;
@@ -31,7 +33,7 @@ public class LoginPresenter<V extends LoginContract.View> extends BasePresenter<
 
     @Override
     public void login() {
-        addDiaposable((Disposable)PlayAndroidService.getInstance().getLoginData(view.get().getUserName(),view.get().getPassword())
+        addDiaposable((Disposable)PlayAndroidService.getInstance(context.get()).getLoginData(view.get().getUserName(),view.get().getPassword())
         .observeOn(Schedulers.io())
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
@@ -51,12 +53,15 @@ public class LoginPresenter<V extends LoginContract.View> extends BasePresenter<
 
     @Override
     public void gotoGuideActivity() {
+//        Log.e("Login",PlayAndroidPreference.getInstance(context.get()).getCookie());
         addDiaposable(Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
                 try {
                     PlayAndroidPreference.getInstance(context.get()).setAccount(view.get().getUserName());
                     PlayAndroidPreference.getInstance(context.get()).setPassword(view.get().getPassword());
+                    PlayAndroidPreference.getInstance(context.get()).setRemember(true);
+                    Log.e("LoginActivity",PlayAndroidPreference.getInstance(context.get()).getRemember()+" ");
                     if (PlayAndroidPreference.getInstance(context.get()).getFirst()){
                         PlayAndroidPreference.getInstance(context.get()).setFirst(false);
                         emitter.onNext(1);
