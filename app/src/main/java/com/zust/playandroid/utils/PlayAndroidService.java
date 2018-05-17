@@ -85,4 +85,8 @@ public class PlayAndroidService{
         return androidApi.addCollect(id);
     }
 
+    public Observable getKnowledgeTreeData(){
+        return androidApi.getKnowledgeTreeData();
+    }
+
 }

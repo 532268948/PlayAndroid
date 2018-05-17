@@ -2,6 +2,7 @@ package com.zust.playandroid.utils;
 
 import com.zust.playandroid.bean.ArticleListBean;
 import com.zust.playandroid.bean.BannerBean;
+import com.zust.playandroid.bean.KnowledgeTreeBean;
 import com.zust.playandroid.bean.LoginBean;
 import com.zust.playandroid.bean.ResponseWrapper;
 
@@ -46,6 +47,10 @@ public interface PlayAndroidApi {
     @FormUrlEncoded
     Observable<ResponseWrapper<LoginBean>> getRegisterData(@Field("username")String username,@Field("password")String password,@Field("repassword")String repassword);
 
+    /**
+     * 轮滑图片
+     * @return
+     */
     @GET("banner/json")
     Observable<ResponseWrapper<List<BannerBean>>> getBannerData();
 
@@ -54,4 +59,7 @@ public interface PlayAndroidApi {
 
     @POST("lg/collect/{id}/json")
     Observable<ResponseWrapper<ArticleListBean>> addCollect(@Path("id")int id);
+
+    @GET("tree/json")
+    Observable<ResponseWrapper<List<KnowledgeTreeBean>>> getKnowledgeTreeData();
 }

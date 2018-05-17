@@ -50,6 +50,12 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
 
     private String mTitle;
 
+    private List<Fragment> fragmentList;
+    private HomeFragment mHomeFragment;
+    private TreeFragment mTreeFragment;
+    private NaviFragment mNaviFragment;
+    private ProjectFragment mProjectFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +78,8 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
         mTitleTextView = (TextView) findViewById(R.id.title);
         mActionButton=(FloatingActionButton)findViewById(R.id.main_floating_action_btn);
 
+        mTitle=getResources().getString(R.string.toolbar_title_home);
+
         mActionButton.setOnClickListener(this);
 
         mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.button_progress_blue));
@@ -86,11 +94,15 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
         });
         mToolbar.setOnMenuItemClickListener(this);
 
-        List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(new HomeFragment());
-        fragmentList.add(new TreeFragment());
-        fragmentList.add(new NaviFragment());
-        fragmentList.add(new ProjectFragment());
+        fragmentList = new ArrayList<>();
+        mHomeFragment=new HomeFragment();
+        mTreeFragment=new TreeFragment();
+        mNaviFragment=new NaviFragment();
+        mProjectFragment=new ProjectFragment();
+        fragmentList.add(mHomeFragment);
+        fragmentList.add(mTreeFragment);
+        fragmentList.add(mNaviFragment);
+        fragmentList.add(mProjectFragment);
         PlayFragmentAdapter mAdapter = new PlayFragmentAdapter(getSupportFragmentManager(), fragmentList);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(3);
@@ -239,13 +251,17 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
 
     @Override
     public void onClick(View v) {
-        if (mTitle.equals("首页")){
+        if (mTitle.equals(getResources().getString(R.string.toolbar_title_home))){
+            if (mHomeFragment!=null){
+                mHomeFragment.jumpToTheTop();
+            }
+        }else if (mTitle.equals(getResources().getString(R.string.toolbar_title_tree))){
+            if (mTreeFragment!=null){
+                mTreeFragment.jumpToTheTop();
+            }
+        }else if(mTitle.equals(getResources().getString(R.string.toolbar_title_navi))){
 
-        }else if (mTitle.equals("体系")){
-
-        }else if(mTitle.equals("导航")){
-
-        }else if (mTitle.equals("项目")){
+        }else if (mTitle.equals(getResources().getString(R.string.toolbar_title_project))){
 
         }
     }
