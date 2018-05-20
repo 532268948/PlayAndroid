@@ -1,6 +1,9 @@
 package com.zust.playandroid.contract.project;
 
 import com.zust.playandroid.base.view.BaseView;
+import com.zust.playandroid.bean.ProjectClassifyBean;
+
+import java.util.List;
 
 /**
  * 作 者： ZUST_YTH
@@ -13,9 +16,9 @@ import com.zust.playandroid.base.view.BaseView;
 
 public interface ProjectContract {
     interface View extends BaseView{
-
+        void showProjectClassifyData(List<ProjectClassifyBean>projectClassifyBeanList);
     }
     interface Presenter{
-
+        void getProjectClassifyData();
     }
 }

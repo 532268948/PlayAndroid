@@ -4,6 +4,9 @@ import com.zust.playandroid.bean.ArticleListBean;
 import com.zust.playandroid.bean.BannerBean;
 import com.zust.playandroid.bean.KnowledgeTreeBean;
 import com.zust.playandroid.bean.LoginBean;
+import com.zust.playandroid.bean.NaviBean;
+import com.zust.playandroid.bean.ProjectClassifyBean;
+import com.zust.playandroid.bean.ProjectListBean;
 import com.zust.playandroid.bean.ResponseWrapper;
 
 import java.util.List;
@@ -14,6 +17,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * 作 者： ZUST_YTH
@@ -62,4 +66,13 @@ public interface PlayAndroidApi {
 
     @GET("tree/json")
     Observable<ResponseWrapper<List<KnowledgeTreeBean>>> getKnowledgeTreeData();
+
+    @GET("navi/json")
+    Observable<ResponseWrapper<List<NaviBean>>> getNaviData();
+
+    @GET("project/tree/json")
+    Observable<ResponseWrapper<List<ProjectClassifyBean>>> getProjectClassifyData();
+
+    @GET("project/list/{page}/json")
+    Observable<ResponseWrapper<ProjectListBean>> getProjectListData(@Path("page") int page,@Query("cid") int id);
 }

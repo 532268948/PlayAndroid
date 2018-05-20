@@ -89,4 +89,15 @@ public class PlayAndroidService{
         return androidApi.getKnowledgeTreeData();
     }
 
+    public Observable getNaviData(){
+        return androidApi.getNaviData();
+    }
+
+    public Observable getProjectClassifyData(){
+        return androidApi.getProjectClassifyData();
+    }
+
+    public Observable getProjectListData(int page,int id){
+        return androidApi.getProjectListData(page,id);
+    }
 }

@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Animation">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnim</item>
+    </style>
+
+    <style name="ActivityAnim" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/search_fade_in</item>
+        <!--<item name="android:activityOpenExitAnimation">@anim/search_fade_out</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/search_fade_in</item>-->
+        <item name="android:activityCloseExitAnimation">@anim/search_fade_out</item>
+    </style>
+
+
+    <style name="ToolbarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Dark">
+        <item name="android:colorBackground">@color/code_black_70</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item> <!--新增一个item，用于控制menu-->
+    </style>
+
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>  <!--把该属性改为false即可使menu位置位于toolbar之下-->
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <declare-styleable name="ProgressButton">
+        <attr name="pb_selector_idle" format="reference"/>
+        <attr name="pb_selector_complete" format="reference"/>
+        <attr name="pb_selector_error" format="reference"/>
+        <attr name="pb_icon_error" format="reference"/>
+        <attr name="pb_icon_complete" format="reference"/>
+        <attr name="pb_color_progress_background" format="color"/>
+        <attr name="pb_color_progress_indicator" format="color"/>
+        <attr name="pb_color_circle" format="color"/>
+        <attr name="pb_text_idle" format="string"/>
+        <attr name="pb_text_complete" format="string"/>
+        <attr name="pb_text_error" format="string"/>
+        <attr name="pb_radius" format="dimension"/>
+        <attr name="pb_stroke_width" format="dimension"/>
+        <attr name="pb_circle_stroke_width" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="FloatingActionMenuButton">
+        <attr name="pb_icon_normal" format="reference"/>
+        <attr name="pb_color_active" format="color"/>
+        <attr name="pb_color_in_active" format="color"/>
+    </declare-styleable>
+
+</resources>

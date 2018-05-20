@@ -14,6 +14,10 @@
     <string name="toolbar_title_project">项 目</string>
     <string name="toolbar_menu_collect">收藏</string>
     <string name="toolbar_menu_cancel_collect">取消收藏</string>
+    <string name="search_history">历史搜索</string>
+    <string name="search_hot_words">热 搜</string>
+    <string name="search_hot_web">常用网站</string>
+    <string name="search">搜 索</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

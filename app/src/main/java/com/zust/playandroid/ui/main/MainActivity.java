@@ -1,11 +1,14 @@
 package com.zust.playandroid.ui.main;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -26,6 +29,7 @@ import com.zust.playandroid.presenter.main.MainPresenter;
 import com.zust.playandroid.ui.Project.ProjectFragment;
 import com.zust.playandroid.ui.homepage.HomeFragment;
 import com.zust.playandroid.ui.navi.NaviFragment;
+import com.zust.playandroid.ui.search.SearchActivity;
 import com.zust.playandroid.ui.tree.TreeFragment;
 
 import java.util.ArrayList;
@@ -197,7 +201,7 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search:
-
+                startActivity(new Intent(this, SearchActivity.class));
                 break;
             case R.id.tree:
 
@@ -210,21 +214,6 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
 
     @Override
     public void titleChangeAnimation(float rotation) {
-//        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(mTitleTextView, "rotationY", 0, 90);
-//        objectAnimator1.setDuration(500);
-////        objectAnimator.start();
-//        objectAnimator1.addListener(new AnimatorListenerAdapter() {
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                super.onAnimationEnd(animation);
-//                mTitleTextView.setText(mTitle);
-//                mTitleTextView.setRotationY(-90);
-//                ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(mTitleTextView, "rotationY", -90, 0);
-//                objectAnimator2.setDuration(500);
-//                objectAnimator2.start();
-//            }
-//        });
-//        objectAnimator1.start();
         mTitleTextView.setRotationY(rotation);
     }
 
