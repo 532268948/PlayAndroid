@@ -100,4 +100,20 @@ public class PlayAndroidService{
     public Observable getProjectListData(int page,int id){
         return androidApi.getProjectListData(page,id);
     }
+
+    public Observable getHotWrodsData(){
+        return androidApi.getHotWordsData();
+    }
+
+    public Observable getWebSitesData(){
+        return androidApi.getWebSitesData();
+    }
+
+    public Observable getSearchData(int page,String k){
+        return androidApi.getSearchData(page,k);
+    }
+
+    public Observable getCollectData(int page){
+        return androidApi.getCollectData(page);
+    }
 }

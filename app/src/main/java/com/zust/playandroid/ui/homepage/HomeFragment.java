@@ -67,10 +67,6 @@ public class HomeFragment extends BaseFragment<HomeContract.View, HomePresenter<
         presenter.getBannerData();
     }
 
-    @Override
-    public void showMessage(String message) {
-
-    }
 
     @Override
     public void showArticleList(ArticleListBean articleListBean, List<BannerBean> imagePathList) {
@@ -90,8 +86,10 @@ public class HomeFragment extends BaseFragment<HomeContract.View, HomePresenter<
 
     @Override
     public void refreshArticle(ArticleListBean articleListBean) {
-        this.articleListBean=articleListBean;
+        this.articleListBean.getDatas().clear();
+        this.articleListBean.getDatas().addAll(articleListBean.getDatas());
         mAdapter.notifyDataSetChanged();
+        mPage=0;
     }
 
     @Override

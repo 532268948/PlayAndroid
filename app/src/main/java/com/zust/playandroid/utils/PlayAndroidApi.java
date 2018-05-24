@@ -1,13 +1,16 @@
 package com.zust.playandroid.utils;
 
+import com.zust.playandroid.bean.ArticleBean;
 import com.zust.playandroid.bean.ArticleListBean;
 import com.zust.playandroid.bean.BannerBean;
+import com.zust.playandroid.bean.HotWordsBean;
 import com.zust.playandroid.bean.KnowledgeTreeBean;
 import com.zust.playandroid.bean.LoginBean;
 import com.zust.playandroid.bean.NaviBean;
 import com.zust.playandroid.bean.ProjectClassifyBean;
 import com.zust.playandroid.bean.ProjectListBean;
 import com.zust.playandroid.bean.ResponseWrapper;
+import com.zust.playandroid.bean.WebSitesBean;
 
 import java.util.List;
 
@@ -75,4 +78,17 @@ public interface PlayAndroidApi {
 
     @GET("project/list/{page}/json")
     Observable<ResponseWrapper<ProjectListBean>> getProjectListData(@Path("page") int page,@Query("cid") int id);
+
+    @GET("hotkey/json")
+    Observable<ResponseWrapper<List<HotWordsBean>>> getHotWordsData();
+
+    @GET("friend/json")
+    Observable<ResponseWrapper<List<WebSitesBean>>> getWebSitesData();
+
+    @POST("article/query/{page}/json")
+    @FormUrlEncoded
+    Observable<ResponseWrapper<ArticleListBean>> getSearchData(@Path("page")int page, @Field("k")String k);
+
+    @GET("lg/collect/list/{page}/json")
+    Observable<ResponseWrapper<ArticleListBean>> getCollectData(@Path("page")int page);
 }

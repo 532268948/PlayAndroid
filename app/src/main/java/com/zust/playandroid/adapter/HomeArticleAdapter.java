@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,7 +113,7 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         if (getItemViewType(position) == TYPE_NORMAL) {
             if (holder instanceof HomeArticleAdapter.ViewHolder) {
-                holder.mTitleTextView.setText(articleBeanList.get(position-1).getTitle());
+                holder.mTitleTextView.setText(Html.fromHtml(articleBeanList.get(position-1).getTitle()));
                 holder.mAuthorTextView.setText("作者："+articleBeanList.get(position-1).getAuthor());
                 holder.mChapterTextView.setText("分类："+articleBeanList.get(position-1).getChapterName());
                 holder.mTimeTextView.setText("发布时间："+articleBeanList.get(position-1).getNiceDate());

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.zust.playandroid.base.presenter.BasePresenter;
 import com.zust.playandroid.base.view.BaseView;
+import com.zust.playandroid.utils.ToastUtil;
 
 /**
  * 作 者： ZUST_YTH
@@ -100,4 +101,9 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
 
     //public abstract void loadAnimation();
 
+
+    @Override
+    public void showMessage(String message) {
+        ToastUtil.shortToast(message);
+    }
 }

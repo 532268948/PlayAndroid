@@ -5,9 +5,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/action_phone"
+            android:id="@+id/my_collect"
             android:icon="@android:drawable/sym_action_call"
-            android:title="phone" />
+            android:title="我的收藏" />
         <item
             android:id="@+id/action_msg"
             android:icon="@android:drawable/sym_action_email"

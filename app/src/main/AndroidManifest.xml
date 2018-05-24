@@ -28,10 +28,12 @@
         <activity android:name=".ui.guide.GuideActivity" />
         <activity android:name=".ui.homepage.detial.ArticleDetialActivity" />
         <activity android:name=".ui.homepage.detial.BannerDetailActivity" />
-        <activity android:name=".ui.search.SearchActivity"
-            android:theme="@style/AppTheme.NoActionBar.Animation"/>
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar.Animation" />
         <activity android:name=".ui.navi.detail.NaviDetailActivity" />
-        <activity android:name=".ui.Project.list.detail.ProjectDetailActivity"></activity>
+        <activity android:name=".ui.Project.list.detail.ProjectDetailActivity" />
+        <activity android:name=".ui.search.detail.SearchDetailActivity"></activity>
     </application>
 
 </manifest>
