@@ -2,20 +2,12 @@ package com.zust.playandroid.utils;
 
 import android.content.Context;
 
-import com.zust.playandroid.bean.LoginBean;
-import com.zust.playandroid.bean.ResponseWrapper;
 import com.zust.playandroid.dao.cookie.AddCookiesInterceptor;
 import com.zust.playandroid.dao.cookie.ReceivedCookiesInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -30,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 
-public class PlayAndroidService{
+public class PlayAndroidService {
 
     private volatile static PlayAndroidService instance = null;
     private static final String baseUrl = "http://www.wanandroid.com/";
@@ -40,7 +32,8 @@ public class PlayAndroidService{
 
     private PlayAndroidService(Context context) {
         //设置超时时间
-        this.context=context;
+        this.context = context;
+
         OkHttpClient.Builder httpcientBuilder = new OkHttpClient.Builder()
                 .addInterceptor(new AddCookiesInterceptor(context))
                 .addInterceptor(new ReceivedCookiesInterceptor(context))
@@ -65,55 +58,59 @@ public class PlayAndroidService{
         return instance;
     }
 
-    public Observable getLoginData( String username, String password) {
+    public Observable getLoginData(String username, String password) {
         return androidApi.getLoginData(username, password);
     }
 
-    public Observable getRegisterData(String username,String password,String repassword){
+    public Observable getRegisterData(String username, String password, String repassword) {
         return androidApi.getRegisterData(username, password, repassword);
     }
 
-    public Observable getBannerData(){
+    public Observable getBannerData() {
         return androidApi.getBannerData();
     }
 
-    public Observable getHomeArticleData(int num){
+    public Observable getHomeArticleData(int num) {
         return androidApi.getHomeArticleData(num);
     }
 
-    public Observable addCollect(int id){
+    public Observable addCollect(int id) {
         return androidApi.addCollect(id);
     }
 
-    public Observable getKnowledgeTreeData(){
+    public Observable getKnowledgeTreeData() {
         return androidApi.getKnowledgeTreeData();
     }
 
-    public Observable getNaviData(){
+    public Observable getKnowledgeHierarchyDetailData(int page, int id) {
+        return androidApi.getKnowledgeHierarchyDetailData(page, id);
+    }
+
+    public Observable getNaviData() {
         return androidApi.getNaviData();
     }
 
-    public Observable getProjectClassifyData(){
+    public Observable getProjectClassifyData() {
         return androidApi.getProjectClassifyData();
     }
 
-    public Observable getProjectListData(int page,int id){
-        return androidApi.getProjectListData(page,id);
+    public Observable getProjectListData(int page, int id) {
+        return androidApi.getProjectListData(page, id);
     }
 
-    public Observable getHotWrodsData(){
+    public Observable getHotWrodsData() {
         return androidApi.getHotWordsData();
     }
 
-    public Observable getWebSitesData(){
+    public Observable getWebSitesData() {
         return androidApi.getWebSitesData();
     }
 
-    public Observable getSearchData(int page,String k){
-        return androidApi.getSearchData(page,k);
+    public Observable getSearchData(int page, String k) {
+        return androidApi.getSearchData(page, k);
     }
 
-    public Observable getCollectData(int page){
+    public Observable getCollectData(int page) {
         return androidApi.getCollectData(page);
     }
 }

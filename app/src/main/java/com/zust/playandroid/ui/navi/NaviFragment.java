@@ -18,6 +18,7 @@ import com.zust.playandroid.bean.ArticleBean;
 import com.zust.playandroid.bean.NaviBean;
 import com.zust.playandroid.contract.navi.NaviContract;
 import com.zust.playandroid.presenter.navi.NaviPresenter;
+import com.zust.playandroid.ui.homepage.detial.ArticleDetialActivity;
 import com.zust.playandroid.ui.navi.detail.NaviDetailActivity;
 import com.zust.playandroid.utils.CommonUtil;
 
@@ -95,7 +96,7 @@ public class NaviFragment extends BaseFragment<NaviContract.View,NaviPresenter<N
         mTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-                Intent intent=new Intent(getActivity(), NaviDetailActivity.class);
+                Intent intent=new Intent(getActivity(), ArticleDetialActivity.class);
                 intent.putExtra("id",articleBeanList.get(position).getId());
                 intent.putExtra("title",articleBeanList.get(position).getTitle());
                 intent.putExtra("link",articleBeanList.get(position).getLink());

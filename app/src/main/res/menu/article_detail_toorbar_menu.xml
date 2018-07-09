@@ -5,5 +5,8 @@
         android:id="@+id/collect"
         android:icon="@drawable/search_48"
         android:title="@string/toolbar_menu_collect" />
-
+    <item
+        android:id="@+id/browser"
+        android:icon="@drawable/browser"
+        android:title="浏览器打开" />
 </menu>

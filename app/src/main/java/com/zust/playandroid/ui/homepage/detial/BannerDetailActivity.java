@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -17,7 +18,9 @@ import com.zust.playandroid.contract.homepage.detial.BannerDetailContract;
 import com.zust.playandroid.presenter.homepage.detial.BannerDetailPresenter;
 import com.zust.playandroid.utils.ToastUtil;
 
-public class BannerDetailActivity extends BaseActivity<BannerDetailContract.View,BannerDetailPresenter<BannerDetailContract.View>> implements BannerDetailContract.View {
+import static android.view.KeyEvent.KEYCODE_BACK;
+
+public class BannerDetailActivity extends BaseActivity<BannerDetailContract.View,BannerDetailPresenter<BannerDetailContract.View>> implements BannerDetailContract.View,KeyEvent.Callback {
 
     private String title;
     private String link;
@@ -38,6 +41,13 @@ public class BannerDetailActivity extends BaseActivity<BannerDetailContract.View
         mToolbar.setTitle(title);
         setSupportActionBar(mToolbar);
 
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         mWebView = (WebView) findViewById(R.id.web_view);
 
         mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
@@ -51,9 +61,28 @@ public class BannerDetailActivity extends BaseActivity<BannerDetailContract.View
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KEYCODE_BACK) {
+            Back();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
     protected BannerDetailPresenter<BannerDetailContract.View> createPresenter() {
         return new BannerDetailPresenter<>();
     }
+
+    @Override
+    public void Back() {
+        if (mWebView.canGoBack()){
+            mWebView.goBack();
+        }else {
+            this.finish();
+        }
+    }
+
     private class MyWebViewClient extends WebViewClient {
 
         @Override
@@ -68,19 +97,15 @@ public class BannerDetailActivity extends BaseActivity<BannerDetailContract.View
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            String url = request.getUrl().toString();
-//            Log.e("should()",url);
-            view.loadUrl(url);
-            if (url.startsWith("http:") || url.startsWith("https:")) {
-                return false;
-            }
-            try {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
-            } catch (Exception e) {
-            }
+//            String url = request.getUrl().toString();
+//            Intent intent = new Intent();
+//            intent.setAction("android.intent.action.VIEW");
+//            Uri content_url = Uri.parse(url);
+//            intent.setData(content_url);
+//            intent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
+//            startActivity(intent);
+            mWebView.loadUrl(request.getUrl().toString());
             return true;
-//            return super.shouldOverrideUrlLoading(view, request);
         }
 
 

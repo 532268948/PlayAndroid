@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.zust.playandroid.R;
 import com.zust.playandroid.bean.ArticleBean;
 import com.zust.playandroid.ui.Project.list.detail.ProjectDetailActivity;
+import com.zust.playandroid.ui.homepage.detial.ArticleDetialActivity;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Glide.with(context).load(articleBeanList.get(position).getEnvelopePic()).into(holder.mImageView);
         holder.mTitleTextView.setText(articleBeanList.get(position).getTitle());
         holder.mContentTextView.setText(articleBeanList.get(position).getDesc());
@@ -54,7 +55,12 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, ProjectDetailActivity.class);
+                Intent intent=new Intent(context, ArticleDetialActivity.class);
+                intent.putExtra("id",articleBeanList.get(position).getId());
+                intent.putExtra("title",articleBeanList.get(position).getTitle());
+                intent.putExtra("link",articleBeanList.get(position).getLink());
+                intent.putExtra("isCollect",articleBeanList.get(position).isCollect());
+                intent.putExtra("author",articleBeanList.get(position).getAuthor());
                 context.startActivity(intent);
             }
         });

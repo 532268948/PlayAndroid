@@ -70,6 +70,9 @@ public interface PlayAndroidApi {
     @GET("tree/json")
     Observable<ResponseWrapper<List<KnowledgeTreeBean>>> getKnowledgeTreeData();
 
+    @GET("article/list/{page}/json")
+    Observable<ResponseWrapper<ArticleListBean>> getKnowledgeHierarchyDetailData(@Path("page") int page, @Query("cid") int id);
+
     @GET("navi/json")
     Observable<ResponseWrapper<List<NaviBean>>> getNaviData();
 

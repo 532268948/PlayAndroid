@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:icon="@android:drawable/ic_dialog_alert"
+        android:icon="@drawable/icon_home_pager_not_selected"
         android:title="首页" />
     <item
         android:id="@+id/tree"
-        android:icon="@android:drawable/ic_dialog_alert"
+        android:icon="@drawable/icon_knowledge_hierarchy_not_selected"
         android:title="体系" />
     <item
         android:id="@+id/navi"
-        android:icon="@android:drawable/ic_dialog_alert"
+        android:icon="@drawable/icon_navigation_not_selected"
         android:title="导航" />
     <item
         android:id="@+id/project"
-        android:icon="@android:drawable/ic_dialog_alert"
+        android:icon="@drawable/icon_project_not_selected"
         android:title="项目" />
 </menu>

@@ -34,7 +34,6 @@ public class ProjectFragment extends BaseFragment<ProjectContract.View, ProjectP
 
     private static final String TAG = "ProjectFragment";
 
-    private RecyclerView mRecyclerView;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private SmartRefreshLayout mRefreshLayout;
@@ -99,9 +98,8 @@ public class ProjectFragment extends BaseFragment<ProjectContract.View, ProjectP
     }
 
     public void jumpToTheTop() {
-        if (mRecyclerView != null) {
-            mRecyclerView.smoothScrollToPosition(0);
-        }
+        this.projectListFragmentList.get(mTabLayout.getSelectedTabPosition()).jumpToTheTop();
+//            mRecyclerView.smoothScrollToPosition(0);
     }
 
     @Override

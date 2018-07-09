@@ -56,17 +56,34 @@
             >
             <TextView
                 android:id="@+id/history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
                 android:text="@string/search_history"
                 android:layout_margin="@dimen/dp_12"
+                android:gravity="center"
                 android:textSize="14dp"/>
+            <ImageView
+                android:id="@+id/history_delete"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/search_history_delete"
+                android:layout_alignParentRight="true"
+                android:layout_toStartOf="@id/flow_search_history"/>
             <com.zhy.view.flowlayout.TagFlowLayout
                 android:id="@+id/flow_search_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/history"
-                android:layout_margin="@dimen/dp_20"/>
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_12"/>
             <TextView
                 android:id="@+id/hot"
                 android:layout_width="match_parent"

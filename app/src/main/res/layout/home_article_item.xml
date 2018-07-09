@@ -12,6 +12,7 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
+    android:transitionName="@string/transition_item"
     app:cardElevation="8dp"
     app:cardCornerRadius="5dp">
     <RelativeLayout

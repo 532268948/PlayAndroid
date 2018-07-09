@@ -13,7 +13,7 @@ import com.zust.playandroid.base.view.BaseView;
 
 public interface BannerDetailContract {
     interface View extends BaseView{
-
+        void Back();
     }
     interface Presenter{
 

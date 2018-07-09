@@ -18,13 +18,13 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnim</item>
     </style>
 
     <style name="ActivityAnim" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/search_fade_in</item>
-        <!--<item name="android:activityOpenExitAnimation">@anim/search_fade_out</item>-->
-        <!--<item name="android:activityCloseEnterAnimation">@anim/search_fade_in</item>-->
         <item name="android:activityCloseExitAnimation">@anim/search_fade_out</item>
     </style>
 

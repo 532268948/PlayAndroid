@@ -34,8 +34,8 @@ public class LoginPresenter<V extends LoginContract.View> extends BasePresenter<
     @Override
     public void login() {
         addDiaposable((Disposable)PlayAndroidService.getInstance(context.get()).getLoginData(view.get().getUserName(),view.get().getPassword())
-        .observeOn(Schedulers.io())
         .subscribeOn(Schedulers.io())
+        .unsubscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeWith(new BaseObserver<ResponseWrapper<LoginBean>>(view.get()) {
             @Override

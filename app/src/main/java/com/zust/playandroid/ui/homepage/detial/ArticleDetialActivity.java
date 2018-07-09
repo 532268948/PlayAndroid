@@ -1,11 +1,13 @@
 package com.zust.playandroid.ui.homepage.detial;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
+import android.transition.Slide;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,9 +26,12 @@ import com.zust.playandroid.utils.ToastUtil;
 
 import java.lang.reflect.Method;
 
+import static android.view.KeyEvent.KEYCODE_BACK;
+
 public class ArticleDetialActivity extends BaseActivity<ArticleDetialContract.View, ArticleDetialPresenter<ArticleDetialContract.View>> implements
         ArticleDetialContract.View,
-        Toolbar.OnMenuItemClickListener{
+        Toolbar.OnMenuItemClickListener,
+        KeyEvent.Callback{
 
     private WebView mWebView;
     private TextView mTitleTextView;
@@ -44,25 +49,34 @@ public class ArticleDetialActivity extends BaseActivity<ArticleDetialContract.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_detial);
 
-        Log.e("Detail", PlayAndroidPreference.getInstance(this).getCookie());
+//        Log.e("Detail", PlayAndroidPreference.getInstance(this).getCookie());
+
+//        getWindow().setEnterTransition(new Explode().setDuration(2000));
+//        getWindow().setSharedElementExitTransition(new Slide().setDuration(2000));
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.button_progress_blue));
 
 
-
-        Intent intent=getIntent();
-        id=intent.getIntExtra("id",0);
-        ToastUtil.shortToast(id+"");
-        title=intent.getStringExtra("title");
-        link=intent.getStringExtra("link");
-        author=intent.getStringExtra("author");
-        isCollect=intent.getBooleanExtra("isCollect",false);
+        Intent intent = getIntent();
+        id = intent.getIntExtra("id", 0);
+        ToastUtil.shortToast(id + "");
+        title = intent.getStringExtra("title");
+        link = intent.getStringExtra("link");
+        author = intent.getStringExtra("author");
+        isCollect = intent.getBooleanExtra("isCollect", false);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(title);
         setSupportActionBar(mToolbar);
 
         mToolbar.setOnMenuItemClickListener(this);
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mWebView = (WebView) findViewById(R.id.web_view);
 //        mTitleTextView=(TextView)findViewById(R.id.title);
@@ -95,7 +109,7 @@ public class ArticleDetialActivity extends BaseActivity<ArticleDetialContract.Vi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.article_detail_toorbar_menu,menu);
+        getMenuInflater().inflate(R.menu.article_detail_toorbar_menu, menu);
         mCollectItem = menu.findItem(R.id.collect);
         if (isCollect) {
             mCollectItem.setTitle(getString(R.string.toolbar_menu_cancel_collect));
@@ -114,10 +128,13 @@ public class ArticleDetialActivity extends BaseActivity<ArticleDetialContract.Vi
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        Log.e("Activity","onMenuItemClick()");
-        switch (item.getItemId()){
+        Log.e("Activity", "onMenuItemClick()");
+        switch (item.getItemId()) {
             case R.id.collect:
                 collectEvent();
+                break;
+            case R.id.browser:
+                openByBrowser();
                 break;
             default:
                 break;
@@ -126,10 +143,10 @@ public class ArticleDetialActivity extends BaseActivity<ArticleDetialContract.Vi
     }
 
     private void collectEvent() {
-        Log.e("Activity","collectEvent()");
-        if (isCollect){
+        Log.e("Activity", "collectEvent()");
+        if (isCollect) {
             presenter.cancelCollect();
-        }else {
+        } else {
             presenter.addCollect();
         }
     }
@@ -139,45 +156,57 @@ public class ArticleDetialActivity extends BaseActivity<ArticleDetialContract.Vi
         return id;
     }
 
+    @Override
+    public void Back() {
+        if (mWebView.canGoBack()){
+            mWebView.goBack();
+        }else {
+            this.finish();
+        }
+    }
+
+    @Override
+    public void openByBrowser() {
+                    Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            Uri content_url = Uri.parse(link);
+            intent.setData(content_url);
+            intent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
+            startActivity(intent);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KEYCODE_BACK) {
+            Back();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     private class MyWebViewClient extends WebViewClient {
 
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-//            view.loadUrl(url);
-//            Log.e("onPageFinished()",url);
-//            imgReset();//重置webview中img标签的图片大小
-//             html加载完成之后，添加监听图片的点击js函数
-//            addImageClickListner();
         }
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            String url = request.getUrl().toString();
-//            Log.e("should()",url);
-            view.loadUrl(url);
-            if (url.startsWith("http:") || url.startsWith("https:")) {
-                return false;
-            }
-            try {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
-            } catch (Exception e) {
-            }
+//            String url = request.getUrl().toString();
+//            Intent intent = new Intent();
+//            intent.setAction("android.intent.action.VIEW");
+//            Uri content_url = Uri.parse(url);
+//            intent.setData(content_url);
+//            intent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
+//            startActivity(intent);
+            view.loadUrl(request.getUrl().toString());
             return true;
-//            return super.shouldOverrideUrlLoading(view, request);
         }
-
-
-        private void imgReset() {
-            mWebView.loadUrl("javascript:(function(){" +
-                    "var objs = document.getElementsByTagName('img'); " +
-                    "for(var i=0;i<objs.length;i++)  " +
-                    "{"
-                    + "var img = objs[i];   " +
-                    "    img.style.maxWidth = '100%'; img.style.height = 'auto';  " +
-                    "}" +
-                    "})()");
-        }
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, R.anim.search_fade_out);
     }
 }

@@ -1,8 +1,13 @@
 package com.zust.playandroid.adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -110,7 +115,7 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         if (getItemViewType(position) == TYPE_NORMAL) {
             if (holder instanceof HomeArticleAdapter.ViewHolder) {
                 holder.mTitleTextView.setText(Html.fromHtml(articleBeanList.get(position-1).getTitle()));
@@ -126,7 +131,9 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
                         intent.putExtra("link",articleBeanList.get(position-1).getLink());
                         intent.putExtra("isCollect",articleBeanList.get(position-1).isCollect());
                         intent.putExtra("author",articleBeanList.get(position-1).getAuthor());
-                        context.startActivity(intent);
+//                        context.startActivity(intent);
+                        context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.mCardView,context.getResources().getString(R.string.transition_item)).toBundle());
+
                     }
                 });
                 return;

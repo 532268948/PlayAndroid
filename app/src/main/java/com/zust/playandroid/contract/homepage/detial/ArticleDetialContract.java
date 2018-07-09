@@ -15,6 +15,8 @@ public interface ArticleDetialContract {
 
     interface View extends BaseView{
         int getId();
+        void Back();
+        void openByBrowser();
     }
 
     interface Presenter{

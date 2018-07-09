@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="56dp"
     xmlns:zhy="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.navi.NaviFragment">
 
@@ -12,13 +13,17 @@
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:background="@color/button_progress_blue"/>
-    <com.zhy.view.flowlayout.TagFlowLayout
-        android:id="@+id/item"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/dp_12"
-        android:paddingLeft="@dimen/dp_12"
-        android:paddingRight="@dimen/dp_12"
-        android:layout_weight="5"
-        zhy:max_select="1"/>
+        android:layout_weight="5">
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_12"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12"
+            zhy:max_select="1"/>
+    </ScrollView>
 </LinearLayout>

@@ -18,6 +18,7 @@
     <string name="search_hot_words">热 搜</string>
     <string name="search_hot_web">常用网站</string>
     <string name="search">搜 索</string>
+    <string name="transition_item">transition_item</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

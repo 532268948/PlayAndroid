@@ -111,9 +111,9 @@ public class ProgressButton extends Button {
             mIconComplete = attr.getResourceId(R.styleable.ProgressButton_pb_icon_complete, 0);
             mIconError = attr.getResourceId(R.styleable.ProgressButton_pb_icon_error, 0);
 
-            mIdleColorState = getResources().getColorStateList(attr.getResourceId(R.styleable.ProgressButton_pb_selector_idle, R.color.pb_idle_state_color));
-            mCompleteColorState = getResources().getColorStateList(attr.getResourceId(R.styleable.ProgressButton_pb_selector_complete, R.color.pb_idle_state_color));
-            mErrorColorState = getResources().getColorStateList(attr.getResourceId(R.styleable.ProgressButton_pb_selector_error, R.color.pb_idle_state_color));
+            mIdleColorState = getResources().getColorStateList(attr.getResourceId(R.styleable.ProgressButton_pb_selector_idle,R.color.white_30));
+            mCompleteColorState = getResources().getColorStateList(attr.getResourceId(R.styleable.ProgressButton_pb_selector_complete, R.color.white_30));
+            mErrorColorState = getResources().getColorStateList(attr.getResourceId(R.styleable.ProgressButton_pb_selector_error, R.color.white_30));
 
             mColorProgress = attr.getResourceId(R.styleable.ProgressButton_pb_color_progress_background, getResources().getColor(R.color.white));
             mColorIndicator = attr.getResourceId(R.styleable.ProgressButton_pb_color_progress_indicator, getResources().getColor(R.color.button_progress_green));

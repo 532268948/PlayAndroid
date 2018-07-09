@@ -32,6 +32,7 @@ public class ArticleDetialPresenter<V extends ArticleDetialContract.View> extend
     public void addCollect() {
         for (String cookie : PlayAndroidPreference.getInstance(context.get()).getCookie(new HashSet<String>()))
             Log.e("Detail", "addCollect()" + cookie);
+        Log.e("Detail",view.get().getId()+"");
         addDiaposable((Disposable) PlayAndroidService.getInstance(context.get()).addCollect(view.get().getId())
                 .observeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

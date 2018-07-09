@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:transitionName="@string/transition_item"
     tools:context=".ui.homepage.detial.ArticleDetialActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -15,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/toolbar_background"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ToolbarPopupTheme"
             app:navigationIcon="@drawable/back">
         </android.support.v7.widget.Toolbar>

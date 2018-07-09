@@ -19,10 +19,12 @@ public interface MainContract {
         void searchShow();
         boolean isAnimating();
         void cancelAnimation();
+        void Logout();
     }
 
     interface Presenter{
         void titleChangeAnimation();
+        void Logout();
     }
 
 }

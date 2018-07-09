@@ -28,7 +28,6 @@ public interface SearchContract {
         String getSearchContent();
         void showSearchData(List<ArticleBean> articleBeanList);
         void TagClick(int type,int position);
-
     }
     interface Presenter{
         void getHistoryData();
@@ -37,5 +36,6 @@ public interface SearchContract {
         void saveHistory();
         void getSearchData();
         void refreshHistoryData();
+        void deleteHistoryData();
     }
 }

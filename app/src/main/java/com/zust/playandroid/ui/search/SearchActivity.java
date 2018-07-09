@@ -50,6 +50,7 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchPres
     private SmartRefreshLayout mRefreshLayout;
     private ScrollView mWordsLayout;
     private RecyclerView mRecyclerView;
+    private ImageView mDeleteImageView;
 
     private List<History> historyList;
     private List<HotWordsBean> hotWordsBeanList;
@@ -80,6 +81,7 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchPres
         mRefreshLayout = (SmartRefreshLayout) findViewById(R.id.bottom);
         mWordsLayout = (ScrollView) findViewById(R.id.key);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mDeleteImageView=(ImageView)findViewById(R.id.history_delete);
 
         mBackImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +111,13 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchPres
                     }
                     STATUS = 1;
                 }
+            }
+        });
+
+        mDeleteImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.deleteHistoryData();
             }
         });
 
@@ -183,7 +192,9 @@ public class SearchActivity extends BaseActivity<SearchContract.View, SearchPres
     @Override
     public void refreshHistoryData(List<History> historyList) {
         this.historyList.clear();
-        this.historyList.addAll(historyList);
+        if (historyList!=null) {
+            this.historyList.addAll(historyList);
+        }
         mHistoryAdapter.notifyDataChanged();
     }
 

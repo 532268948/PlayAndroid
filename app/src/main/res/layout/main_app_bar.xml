@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/toolbar_background"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIcon="@drawable/account">
             <TextView
                 android:id="@+id/title"
@@ -47,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:background="@drawable/main_bot_nav_bg"
         app:menu="@menu/bottom_navigation_items"
         app:itemIconTint="@color/main_bnv_state_color"
         app:itemTextColor="@color/main_bnv_state_color" />

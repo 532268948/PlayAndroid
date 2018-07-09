@@ -1,6 +1,7 @@
 package com.zust.playandroid.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,10 +12,12 @@ import android.widget.TextView;
 
 import com.zust.playandroid.R;
 import com.zust.playandroid.bean.KnowledgeTreeBean;
+import com.zust.playandroid.ui.tree.Tree2Activity;
 import com.zust.playandroid.utils.CommonUtil;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -44,7 +47,7 @@ public class TreeAdapter extends RecyclerView.Adapter<TreeAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.mTextView.setText(knowledgeTreeBeanList.get(position).getName());
         holder.mTextView.setTextColor(CommonUtil.randomColor());
         String itemTitle="";
@@ -55,7 +58,10 @@ public class TreeAdapter extends RecyclerView.Adapter<TreeAdapter.ViewHolder> {
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(context, Tree2Activity.class);
+                intent.putExtra("knowledge",(Serializable)knowledgeTreeBeanList.get(position).getChildren());
+                intent.putExtra("title",knowledgeTreeBeanList.get(position).getName());
+                context.startActivity(intent);
             }
         });
     }

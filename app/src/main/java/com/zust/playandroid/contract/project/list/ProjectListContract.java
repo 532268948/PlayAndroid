@@ -24,6 +24,7 @@ public interface ProjectListContract {
         boolean loadMoreSuccess(List<ArticleBean> articleBeanList);
         int getCurrentPage();
         void setCurrentPage(int page);
+        void jumpToTheTop();
     }
 
     interface Presenter{

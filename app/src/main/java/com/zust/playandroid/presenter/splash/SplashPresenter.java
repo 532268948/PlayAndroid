@@ -36,7 +36,7 @@ public class SplashPresenter<V extends SplashContract.View> extends BasePresente
         addDiaposable(Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-                Log.e("SplashPresenter",PlayAndroidPreference.getInstance(context.get()).getRemember()+" ");
+//                Log.e("SplashPresenter",PlayAndroidPreference.getInstance(context.get()).getRemember()+" ");
                 if (PlayAndroidPreference.getInstance(context.get()).getRemember()) {
                     emitter.onNext(1);
                 } else {

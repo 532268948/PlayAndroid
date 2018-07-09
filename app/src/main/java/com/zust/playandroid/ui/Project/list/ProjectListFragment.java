@@ -110,4 +110,9 @@ public class ProjectListFragment extends BaseFragment<ProjectListContract.View, 
         this.mPage = page;
     }
 
+    @Override
+    public void jumpToTheTop() {
+        mRecyclerView.smoothScrollToPosition(0);
+    }
+
 }

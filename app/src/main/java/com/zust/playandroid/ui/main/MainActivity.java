@@ -1,5 +1,7 @@
 package com.zust.playandroid.ui.main;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,8 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -28,9 +28,12 @@ import com.zust.playandroid.dao.db.PlayAndroidPreference;
 import com.zust.playandroid.presenter.main.MainPresenter;
 import com.zust.playandroid.ui.Project.ProjectFragment;
 import com.zust.playandroid.ui.homepage.HomeFragment;
+import com.zust.playandroid.ui.login.LoginActivity;
 import com.zust.playandroid.ui.navi.NaviFragment;
 import com.zust.playandroid.ui.search.SearchActivity;
 import com.zust.playandroid.ui.tree.TreeFragment;
+import com.zust.playandroid.utils.ActivityManager;
+import com.zust.playandroid.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,7 +44,7 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
         NavigationView.OnNavigationItemSelectedListener,
         BottomNavigationView.OnNavigationItemSelectedListener,
         ViewPager.OnPageChangeListener, Toolbar.OnMenuItemClickListener,
-        View.OnClickListener{
+        View.OnClickListener {
 
     private BottomNavigationView mBottomNavigationView;
     private DrawerLayout mDrawerLayout;
@@ -80,9 +83,9 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mViewPager = (ViewPager) findViewById(R.id.view_page);
         mTitleTextView = (TextView) findViewById(R.id.title);
-        mActionButton=(FloatingActionButton)findViewById(R.id.main_floating_action_btn);
+        mActionButton = (FloatingActionButton) findViewById(R.id.main_floating_action_btn);
 
-        mTitle=getResources().getString(R.string.toolbar_title_home);
+        mTitle = getResources().getString(R.string.toolbar_title_home);
 
         mActionButton.setOnClickListener(this);
 
@@ -99,10 +102,10 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
         mToolbar.setOnMenuItemClickListener(this);
 
         fragmentList = new ArrayList<>();
-        mHomeFragment=new HomeFragment();
-        mTreeFragment=new TreeFragment();
-        mNaviFragment=new NaviFragment();
-        mProjectFragment=new ProjectFragment();
+        mHomeFragment = new HomeFragment();
+        mTreeFragment = new TreeFragment();
+        mNaviFragment = new NaviFragment();
+        mProjectFragment = new ProjectFragment();
         fragmentList.add(mHomeFragment);
         fragmentList.add(mTreeFragment);
         fragmentList.add(mNaviFragment);
@@ -123,7 +126,21 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("提示")
+                    .setMessage("是否退出应用")
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            com.zust.playandroid.utils.ActivityManager.getInstance().exitApp();
+                        }
+                    })
+                    .create().show();
         }
     }
 
@@ -145,6 +162,11 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
             case R.id.project:
 //                mTitle=getResources().getString(R.string.toolbar_title_project);
                 mViewPager.setCurrentItem(3);
+                break;
+            case R.id.action_logout:
+//                ToastUtil.shortToast("logout");
+//                Logout();
+                presenter.Logout();
                 break;
             default:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -203,9 +225,6 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
             case R.id.search:
                 startActivity(new Intent(this, SearchActivity.class));
                 break;
-            case R.id.tree:
-
-                break;
             default:
                 break;
         }
@@ -239,19 +258,29 @@ public class MainActivity extends BaseActivity<MainContract.View, MainPresenter<
     }
 
     @Override
+    public void Logout() {
+        startActivity(new Intent(this, LoginActivity.class));
+        ActivityManager.getInstance().removeWhenLogin();
+    }
+
+    @Override
     public void onClick(View v) {
-        if (mTitle.equals(getResources().getString(R.string.toolbar_title_home))){
-            if (mHomeFragment!=null){
+        if (mTitle.equals(getResources().getString(R.string.toolbar_title_home))) {
+            if (mHomeFragment != null) {
                 mHomeFragment.jumpToTheTop();
             }
-        }else if (mTitle.equals(getResources().getString(R.string.toolbar_title_tree))){
-            if (mTreeFragment!=null){
+        } else if (mTitle.equals(getResources().getString(R.string.toolbar_title_tree))) {
+            if (mTreeFragment != null) {
                 mTreeFragment.jumpToTheTop();
             }
-        }else if(mTitle.equals(getResources().getString(R.string.toolbar_title_navi))){
-
-        }else if (mTitle.equals(getResources().getString(R.string.toolbar_title_project))){
-
+        } else if (mTitle.equals(getResources().getString(R.string.toolbar_title_navi))) {
+            if (mNaviFragment != null) {
+                mNaviFragment.jumpToTheTop();
+            }
+        } else if (mTitle.equals(getResources().getString(R.string.toolbar_title_project))) {
+            if (mProjectFragment != null) {
+                mProjectFragment.jumpToTheTop();
+            }
         }
     }
 }

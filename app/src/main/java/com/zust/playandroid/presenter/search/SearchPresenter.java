@@ -15,6 +15,7 @@ import com.zust.playandroid.dao.db.HistoryUtils;
 import com.zust.playandroid.utils.PlayAndroidService;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -110,7 +111,7 @@ public class SearchPresenter<V extends SearchContract.View> extends BasePresente
         .subscribeWith(new BaseObserver<Integer>(view.get()) {
             @Override
             public void onNext(Integer integer) {
-
+                refreshHistoryData();
             }
         }));
     }
@@ -131,6 +132,7 @@ public class SearchPresenter<V extends SearchContract.View> extends BasePresente
                         }else {
                             view.get().showMessage(responseWrapper.getErrorMsg());
                         }
+//                        refreshHistoryData();
                     }
                 }));
     }
@@ -155,5 +157,32 @@ public class SearchPresenter<V extends SearchContract.View> extends BasePresente
                         view.get().refreshHistoryData(historyList);
                     }
                 }));
+    }
+
+    @Override
+    public void deleteHistoryData() {
+        if(historyUtils==null){
+            historyUtils=new HistoryUtils(context.get());
+        }
+        addDiaposable((Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                historyUtils.deleteAll();
+                emitter.onNext(1);
+            }
+        }).subscribeOn(Schedulers.io())
+        .unsubscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeWith(new BaseObserver<Integer>(view.get()) {
+            @Override
+            public void onNext(Integer integer) {
+                if (integer==1) {
+                    view.get().showMessage("历史搜索信息已清除");
+                    view.get().refreshHistoryData(null);
+                }else {
+                    view.get().showMessage("出现未知错误");
+                }
+            }
+        })));
     }
 }
